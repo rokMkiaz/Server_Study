@@ -19,6 +19,8 @@
 
     <Compile Remove="R_Program6_SpinLock.cs" />
     <Compile Remove="R_Program7_SpinLock.cs" />
+    <Compile Remove="R_Program8_Lock.cs" />
+    <Compile Remove="R_Program8_ReaderWriterLock.cs" />
     <Compile Remove="R_Program_Thread.cs" />
 
   </ItemGroup>
