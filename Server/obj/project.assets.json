@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\DESKTOP-EMLAB\\.nuget\\packages\\": {}
+    "C:\\Users\\JackSon\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DESKTOP-EMLAB\\Desktop\\Server_Study-master\\Server\\Server.csproj",
+      "projectUniqueName": "G:\\Desktop\\VisualStudio file\\Server\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\DESKTOP-EMLAB\\Desktop\\Server_Study-master\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\DESKTOP-EMLAB\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DESKTOP-EMLAB\\Desktop\\Server_Study-master\\Server\\obj\\",
+      "projectPath": "G:\\Desktop\\VisualStudio file\\Server\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\JackSon\\.nuget\\packages\\",
+      "outputPath": "G:\\Desktop\\VisualStudio file\\Server\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\DESKTOP-EMLAB\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\JackSon\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

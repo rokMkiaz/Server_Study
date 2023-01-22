@@ -13,3 +13,18 @@ C:\Users\DESKTOP-EMLAB\Desktop\Server_Study-master\DummyClient\obj\Debug\net6.0\
 C:\Users\DESKTOP-EMLAB\Desktop\Server_Study-master\DummyClient\obj\Debug\net6.0\DummyClient.pdb
 C:\Users\DESKTOP-EMLAB\Desktop\Server_Study-master\DummyClient\obj\Debug\net6.0\DummyClient.genruntimeconfig.cache
 C:\Users\DESKTOP-EMLAB\Desktop\Server_Study-master\DummyClient\obj\Debug\net6.0\ref\DummyClient.dll
+G:\Desktop\VisualStudio file\Server\DummyClient\bin\Debug\net6.0\DummyClient.exe
+G:\Desktop\VisualStudio file\Server\DummyClient\bin\Debug\net6.0\DummyClient.deps.json
+G:\Desktop\VisualStudio file\Server\DummyClient\bin\Debug\net6.0\DummyClient.runtimeconfig.json
+G:\Desktop\VisualStudio file\Server\DummyClient\bin\Debug\net6.0\DummyClient.dll
+G:\Desktop\VisualStudio file\Server\DummyClient\bin\Debug\net6.0\DummyClient.pdb
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\DummyClient.csproj.AssemblyReference.cache
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\DummyClient.GeneratedMSBuildEditorConfig.editorconfig
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\DummyClient.AssemblyInfoInputs.cache
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\DummyClient.AssemblyInfo.cs
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\DummyClient.csproj.CoreCompileInputs.cache
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\DummyClient.dll
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\refint\DummyClient.dll
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\DummyClient.pdb
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\DummyClient.genruntimeconfig.cache
+G:\Desktop\VisualStudio file\Server\DummyClient\obj\Debug\net6.0\ref\DummyClient.dll

@@ -13,3 +13,18 @@ C:\Users\DESKTOP-EMLAB\Desktop\Server_Study-master\ServerCore\obj\Debug\net6.0\r
 C:\Users\DESKTOP-EMLAB\Desktop\Server_Study-master\ServerCore\obj\Debug\net6.0\ServerCore.pdb
 C:\Users\DESKTOP-EMLAB\Desktop\Server_Study-master\ServerCore\obj\Debug\net6.0\ServerCore.genruntimeconfig.cache
 C:\Users\DESKTOP-EMLAB\Desktop\Server_Study-master\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll
+G:\Desktop\VisualStudio file\Server\ServerCore\bin\Debug\net6.0\ServerCore.exe
+G:\Desktop\VisualStudio file\Server\ServerCore\bin\Debug\net6.0\ServerCore.deps.json
+G:\Desktop\VisualStudio file\Server\ServerCore\bin\Debug\net6.0\ServerCore.runtimeconfig.json
+G:\Desktop\VisualStudio file\Server\ServerCore\bin\Debug\net6.0\ServerCore.dll
+G:\Desktop\VisualStudio file\Server\ServerCore\bin\Debug\net6.0\ServerCore.pdb
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.AssemblyReference.cache
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfoInputs.cache
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\ServerCore.AssemblyInfo.cs
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\ServerCore.csproj.CoreCompileInputs.cache
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\ServerCore.dll
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\refint\ServerCore.dll
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\ServerCore.pdb
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\ServerCore.genruntimeconfig.cache
+G:\Desktop\VisualStudio file\Server\ServerCore\obj\Debug\net6.0\ref\ServerCore.dll
