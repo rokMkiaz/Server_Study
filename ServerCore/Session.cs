@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
 
 namespace ServerCore
 {
-    internal class Session
+
+    public abstract class Session
     {
         Socket _socket;
         int _disconnected = 0;
@@ -19,6 +21,11 @@ namespace ServerCore
         SocketAsyncEventArgs _sendArgs = new SocketAsyncEventArgs();
         SocketAsyncEventArgs _recevArgs = new SocketAsyncEventArgs();
 
+        //새로운 클래스로 만들어도됨.
+        public abstract void OnConnected(EndPoint endPoint);//클라이언트가 접속한 시점
+        public abstract void OnRecv(ArraySegment<byte> buffer);
+        public abstract void OnSend(int numOfBytes);
+        public abstract void OnDisconnected(EndPoint endPoint); 
         public void Init(Socket socket)
         {
             _socket = socket;
@@ -47,6 +54,7 @@ namespace ServerCore
             {
                 return;
             }
+            OnDisconnected(_socket.RemoteEndPoint);
             _socket.Shutdown(SocketShutdown.Both);
             _socket.Close();    
         }
@@ -78,8 +86,9 @@ namespace ServerCore
                         _sendArgs.BufferList = null;
                         _pendingList.Clear();//
 
-                        Console.WriteLine($"Transferred bytes:{_sendArgs.BytesTransferred}");
+                        OnSend(_sendArgs.BytesTransferred);
 
+                       
                         if (_sendQueue.Count > 0)
                         {
                             RegisterSend();
@@ -113,8 +122,11 @@ namespace ServerCore
             {
                 try
                 {
-                    string recvData = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
-                    Console.WriteLine($"[From Client]{recvData}");
+                    OnRecv(new ArraySegment<byte>(args.Buffer, args.Offset, args.BytesTransferred));
+                    //string recvData = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
+                    //Console.WriteLine($"[From Client]{recvData}");
+                    //메시지 받았다는거 남겨줘야함.
+
                     RegisterRecv();
 
                 }

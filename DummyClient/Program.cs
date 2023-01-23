@@ -3,9 +3,42 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using ServerCore;
 
 namespace DummyClient
 {
+    class GameSession : Session
+    {
+        public override void OnConnected(EndPoint endPoint)
+        {
+            Console.WriteLine($"OnConnected :{endPoint}");
+
+            //보낸다
+            for (int i = 0; i < 5; i++)
+            {
+                byte[] sendBuff = Encoding.UTF8.GetBytes($"Hello World! {i}");
+                Send(sendBuff);
+
+            }
+        }
+
+        public override void OnDisconnected(EndPoint endPoint)
+        {
+            Console.WriteLine($"OnDisconnected :{endPoint}");
+        }
+
+        public override void OnRecv(ArraySegment<byte> buffer)
+        {
+            string recvData = Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
+            Console.WriteLine($"[From Server]{recvData}");
+        }
+
+        public override void OnSend(int numOfBytes)
+        {
+            Console.WriteLine($"Transferred bytes:{numOfBytes}");
+
+        }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -16,36 +49,37 @@ namespace DummyClient
             IPAddress ipAddr = iphost.AddressList[0]; //하나 혹은 여러개의 주소를 받을 수 있음 DNS서버가 해주는것
             IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777); //포트 번호=서버와 맞춰줘야함
 
-            while(true)
+            Connector connector = new Connector();
+            connector.Connect(endPoint, () => { return new GameSession(); });
+
+            while (true)
             {
                 Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
                 try
                 {
-                    //연결 시도
-                    socket.Connect(endPoint);
-                    Console.WriteLine($"Connected To{socket.RemoteEndPoint.ToString()}");
+                    //연결 시도->Connector
+                    //socket.Connect(endPoint);
+                    //Console.WriteLine($"Connected To{socket.RemoteEndPoint.ToString()}");
 
 
-                    //보낸다
-                    for(int i = 0;i < 5; i++)
-                    {
-                        byte[] sendBuff = Encoding.UTF8.GetBytes($"Hello World! {i}");
-                        int sendBytes = socket.Send(sendBuff);
+                    ////보낸다-> Session으로 이동
+                    //for(int i = 0;i < 5; i++)
+                    //{
+                    //    byte[] sendBuff = Encoding.UTF8.GetBytes($"Hello World! {i}");
+                    //    int sendBytes = socket.Send(sendBuff);
+                    //}
 
-                    }
-            
 
-                    //받는다
-                    byte[] recBuff = new byte[1024];
-                    int recBytes = socket.Receive(recBuff);
-                    string recData = Encoding.UTF8.GetString(recBuff, 0, recBytes);
-
-                    Console.WriteLine($"[From Server]{recData}");
+                    ////받는다 -> Session으로 이동
+                    //byte[] recBuff = new byte[1024];
+                    //int recBytes = socket.Receive(recBuff);
+                    //string recData = Encoding.UTF8.GetString(recBuff, 0, recBytes);
+                    //Console.WriteLine($"[From Server]{recData}");
 
                     //나간다
-                    socket.Shutdown(SocketShutdown.Both);
-                    socket.Close();
+                    //socket.Shutdown(SocketShutdown.Both);
+                    //socket.Close();
                 }
                 catch (Exception e)
                 {

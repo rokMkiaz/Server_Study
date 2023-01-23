@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace ServerCore
 {
-    class Listener
+    public class Listener
     {
         Socket _listenSocket;
-        Action<Socket> _onAcceptHandler;
+        Func<Session> _sessionFactory;
 
-        public void init(IPEndPoint endPoint, Action<Socket> onAcceptHandler)
+        public void init(IPEndPoint endPoint, Func<Session> sessionFactory)
         {
             _listenSocket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            _onAcceptHandler += onAcceptHandler;
+            _sessionFactory += sessionFactory;
 
 
             //식별자 번호 부여
@@ -47,8 +47,10 @@ namespace ServerCore
         {
             if(args.SocketError == SocketError.Success) 
             {
-                //TODO::유저가 왔을 때 처리
-                _onAcceptHandler.Invoke(args.AcceptSocket);
+                Session session = _sessionFactory.Invoke();//밖에서 만들어주는게 좋음.
+                session.Init(args.AcceptSocket);
+                session.OnConnected(args.AcceptSocket.RemoteEndPoint);
+                //_onAcceptHandler.Invoke(args.AcceptSocket);
             }
             else
                 Console.WriteLine(args.SocketError.ToString());
