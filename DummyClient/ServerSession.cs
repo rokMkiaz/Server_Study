@@ -18,7 +18,7 @@ namespace DummyClient
         public abstract void Read(ArraySegment<byte> s);
     }
 
-    class PlayerInfoReq : Packet
+    class PlayerInfoReq 
     {
         public long playerID;
         public string name;
