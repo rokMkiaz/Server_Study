@@ -73,6 +73,8 @@ public class PacketManager
 @"        makeFunc.Add((ushort)PacketID.{0}, MakePacket<{0}>);
         handler.Add((ushort)PacketID.{0}, PacketHandler.{0}Handler);";
 
+        //{0} 패킷 이름/번호목록
+        //{1} 패킷 목록
         public static string fileFormat =
 @"using ServerCore;
 using System;
