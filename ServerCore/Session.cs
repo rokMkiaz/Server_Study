@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Sockets;
@@ -64,7 +65,16 @@ namespace ServerCore
         public abstract void OnConnected(EndPoint endPoint);//클라이언트가 접속한 시점
         public abstract int OnRecv(ArraySegment<byte> buffer);
         public abstract void OnSend(int numOfBytes);
-        public abstract void OnDisconnected(EndPoint endPoint); 
+        public abstract void OnDisconnected(EndPoint endPoint);
+
+        void Clear()
+        {
+            lock (_lock)
+            {
+                _sendQueue.Clear();
+                _pendingList.Clear();
+            }
+        }
         public void Init(Socket socket)
         {
             _socket = socket;
@@ -76,6 +86,20 @@ namespace ServerCore
             _sendArgs.Completed += new EventHandler<SocketAsyncEventArgs>(OnSendCompleted);
 
             RegisterRecv();
+        }
+        public void Send(List<ArraySegment<byte>> sendBuffList)
+        {
+            if (sendBuffList.Count == 0)
+                return;
+
+            lock (_lock)
+            {
+                foreach (ArraySegment<byte> sendBuff in sendBuffList)
+                    _sendQueue.Enqueue(sendBuff);
+
+                if (_pendingList.Count == 0)
+                    RegisterSend();
+            }
         }
 
         public void Send(ArraySegment<byte> sendBuff) //다음에는 패킷
@@ -95,7 +119,8 @@ namespace ServerCore
             }
             OnDisconnected(_socket.RemoteEndPoint);
             _socket.Shutdown(SocketShutdown.Both);
-            _socket.Close();    
+            _socket.Close();
+            Clear();
         }
 
         void RegisterSend( ) //Send를 할때는 다른 방식 필요
@@ -122,15 +147,12 @@ namespace ServerCore
                     try
                     {
                         _sendArgs.BufferList = null;
-                        _pendingList.Clear();//
+                        _pendingList.Clear();
 
                         OnSend(_sendArgs.BytesTransferred);
 
-                       
                         if (_sendQueue.Count > 0)
-                        {
                             RegisterSend();
-                        }
                     }
                     catch (Exception e)
                     {

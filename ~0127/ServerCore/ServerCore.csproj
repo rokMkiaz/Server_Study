@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+
+
+ 
+    <Compile Remove="R_Program2_ThreadASM.cs" />
+
+
+
+ 
+    <Compile Remove="R_Program3_ThreadSpeed.cs" />
+    <Compile Remove="R_Program4_MemoryBarrier.cs" />
+    <Compile Remove="R_Program5_Lock.cs" />
+    <Compile Remove="R_Program6_SpinLock.cs" />
+    <Compile Remove="R_Program7_SpinLock.cs" />
+    <Compile Remove="R_Program8_Lock.cs" />
+    <Compile Remove="R_Program8_ReaderWriterLock.cs" />
+    <Compile Remove="R_program9_TLS.cs" />
+    <Compile Remove="R_Program_Thread.cs" />
+
+  </ItemGroup>
+
+
+
+</Project>

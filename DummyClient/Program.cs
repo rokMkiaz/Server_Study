@@ -19,8 +19,9 @@ namespace DummyClient
             IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777); //포트 번호=서버와 맞춰줘야함
 
             Connector connector = new Connector();
-            connector.Connect(endPoint, () => { return new ServerSession(); });
-
+            connector.Connect(endPoint,
+              () => { return SessionManager.Instance.Generate(); },
+              500);
             while (true)
             {
                 Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
@@ -49,6 +50,7 @@ namespace DummyClient
                     //나간다
                     //socket.Shutdown(SocketShutdown.Both);
                     //socket.Close();
+                    SessionManager.Instance.SendForEach();
                 }
                 catch (Exception e)
                 {

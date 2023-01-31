@@ -12,6 +12,12 @@ namespace Server
 
     class ClientSession : PacketSession
     {
+        public int SessionId { get; set; }
+        public GameRoom Room { get; set; }
+        public float PosX { get; set; }
+        public float PosY { get; set; }
+        public float PosZ { get; set; }
+
         public override void OnConnected(EndPoint endPoint)
         {
             Console.WriteLine($"OnConnected : {endPoint} ");
@@ -29,18 +35,19 @@ namespace Server
 
             //Send(sendBuff);
 
-            Thread.Sleep(1000);
-
-            Disconnect();
+            //Thread.Sleep(1000);
+            Program.Room.Push(() => Program.Room.Enter(this));
+            //Disconnect();
         }
         public override void OnRecvPacket(ArraySegment<byte> buffer)
         {
-            ushort count = 0;
+            PacketManager.Instance.OnRecvPacket(this, buffer);
+            //ushort count = 0;
          
-            ushort size = BitConverter.ToUInt16(buffer.Array, buffer.Offset+count);
-            count += sizeof(ushort);
-            ushort id = BitConverter.ToUInt16(buffer.Array, buffer.Offset + count);
-            count += sizeof(ushort);
+            //ushort size = BitConverter.ToUInt16(buffer.Array, buffer.Offset+count);
+            //count += sizeof(ushort);
+            //ushort id = BitConverter.ToUInt16(buffer.Array, buffer.Offset + count);
+            //count += sizeof(ushort);
             //switch((PacketID)id)
             //{
             //    case PacketID.PlayerInfoReq:
@@ -57,13 +64,21 @@ namespace Server
             //        break;
             //}
             
-            Console.WriteLine($"RecvPacketID : {id}, Size : {size}");
+            //Console.WriteLine($"RecvPacketID : {id}, Size : {size}");
 
         }
 
         public override void OnDisconnected(EndPoint endPoint)
         {
-            Console.WriteLine($"OnDisconnected :{endPoint}");
+            SessionManager.Instance.Remove(this);
+            if (Room != null)
+            {
+                GameRoom room = Room;
+                room.Push(() => room.Leave(this));
+                Room = null;
+            }
+
+            Console.WriteLine($"OnDisconnected : {endPoint}");
         }
 
 
@@ -78,7 +93,7 @@ namespace Server
 
         public override void OnSend(int numOfBytes)
         {
-            Console.WriteLine($"Transferred bytes:{numOfBytes}");
+            //Console.WriteLine($"Transferred bytes:{numOfBytes}");
 
         }
     }

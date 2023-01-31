@@ -13,6 +13,7 @@ namespace Server
     class Program
     {
         static Listener _listener = new Listener();
+        public static GameRoom Room = new GameRoom();
 
         //static void OnAcceptHandler(Socket clientSocket)//OnConnected로 이동됨.
         //{
@@ -34,6 +35,12 @@ namespace Server
         //        Console.WriteLine(e);
         //    }
         //}
+
+        static void FlushRoom()
+        {
+            Room.Push(() => Room.Flush());
+            JobTimer.Instance.Push(FlushRoom, 250);
+        }
         static void Main(string[] args)
         {
             //DNS
@@ -44,13 +51,16 @@ namespace Server
 
 
 
-            _listener.init(endPoint, () => { return new ClientSession(); });
+            _listener.init(endPoint, () => { return SessionManager.Instance.Generate(); });
             Console.WriteLine("Listening...");
+
+            //FlushRoom();
+            JobTimer.Instance.Push(FlushRoom);
 
             //서버 오픈 대기
             while (true)
             {
-
+                JobTimer.Instance.Flush();
 
             }
 
