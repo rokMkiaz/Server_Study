@@ -15,7 +15,7 @@ namespace ServerCore
     {
         public static ThreadLocal<SendBuffer> CurrentBuffer = new(() => { return null; });//자신의 지역에서만 사용하게하는 스레드
 
-        public static int ChunkSize { get; set; } = 4096 * 100;//초기 버퍼 크기 설정
+        public static int ChunkSize { get; set; } = 65535 * 100;//초기 버퍼 크기 설정
 
         public static ArraySegment<byte> Open(int reserveSize)
         {

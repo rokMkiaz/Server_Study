@@ -17,7 +17,7 @@ namespace ServerCore
         public sealed override int OnRecv(ArraySegment<byte> buffer) //sealed 다른 외부가 상속받으면 오류나게함
         {
             int processLen = 0;//몇바이트 까지 왔는지 검사
-            //int packetCount = 0;
+            int packetCount = 0;
 
             while (true)
             {
@@ -32,14 +32,14 @@ namespace ServerCore
 
                 // 여기까지 왔으면 패킷 조립 가능.
                 OnRecvPacket(new ArraySegment<byte>(buffer.Array, buffer.Offset, dataSize));
-                //++packetCount;
+                ++packetCount;
 
                 processLen += dataSize;
                 buffer = new ArraySegment<byte>(buffer.Array, buffer.Offset + dataSize, buffer.Count - dataSize);
             }
 
-            //if (packetCount > 1)
-            //    Console.WriteLine($"패킷 모아보내기 : {packetCount}");
+            if (packetCount > 1)
+                Console.WriteLine($"패킷 모아보내기 : {packetCount}");
 
             return processLen;
         }
@@ -52,7 +52,7 @@ namespace ServerCore
         Socket _socket;
         int _disconnected = 0;
 
-        RecvBuffer _recvBuffer = new RecvBuffer(4096);
+        RecvBuffer _recvBuffer = new RecvBuffer(65535);
 
         object _lock = new object();
         Queue<ArraySegment<byte>> _sendQueue = new Queue<ArraySegment<byte>>();

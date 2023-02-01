@@ -7,7 +7,7 @@ using ServerCore;
 
 namespace Server
 {
-    class GameRoom : IJobQueue
+    class GameRoom : IJobQueue //Field,Zone
     { 
         readonly List<ClientSession> sessions = new();
         readonly JobQueue jobQueue = new();
@@ -28,7 +28,7 @@ namespace Server
 
         public void Broadcast(ArraySegment<byte> segment)
         {
-            pendingList.Add(segment);
+            pendingList.Add(segment);//패킷 모아보내기
         }
 
         public void Enter(ClientSession session)

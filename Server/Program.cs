@@ -51,7 +51,7 @@ namespace Server
 
 
 
-            _listener.init(endPoint, () => { return SessionManager.Instance.Generate(); });
+            _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
             Console.WriteLine("Listening...");
 
             //FlushRoom();
