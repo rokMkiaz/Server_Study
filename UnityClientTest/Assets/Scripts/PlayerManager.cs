@@ -19,8 +19,9 @@ public class PlayerManager
 
             if (p.isSelf)
             {
-                MyPlayer myPlayer = go.AddComponent<MyPlayer>();
+                MyPlayer myPlayer = go.AddComponent<MyPlayer>(); //자신일 때
                 myPlayer.PlayerId = p.playerId;
+               
                 myPlayer.transform.position = new Vector3(p.posX, p.posY, p.posZ);
                 this.myPlayer = myPlayer;
             }

@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class MyPlayer : Player
 {
-    NetworkManager network;
+    NetworkManager _network;
+    
 
     void Start()
     {
         StartCoroutine(CoSendPacket());
-        network = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        this.GetComponent<MeshRenderer>().material = Resources.Load<Material>("MyPlayer");
+        _network = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
     }
 
     void Update()
@@ -27,7 +29,10 @@ public class MyPlayer : Player
             movePacket.posX = Random.Range(-50f, 50f);
             movePacket.posY = 0;
             movePacket.posZ = Random.Range(-50f, 50f);
-            network.Send(movePacket.Write());
+
+
+
+            _network.Send(movePacket.Write());
         }
     }
 }
