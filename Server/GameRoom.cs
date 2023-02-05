@@ -9,7 +9,7 @@ namespace Server
 {
     class GameRoom : IJobQueue //Field,Zone
     { 
-        readonly List<ClientSession> sessions = new();
+        readonly List<ClientSession> _sessions = new();
         readonly JobQueue jobQueue = new();
         readonly List<ArraySegment<byte>> pendingList = new();
 
@@ -20,7 +20,7 @@ namespace Server
 
         public void Flush()
         {
-            foreach (ClientSession s in sessions)
+            foreach (ClientSession s in _sessions)
                 s.Send(pendingList);
             //Console.WriteLine($"Flushed {pendingList.Count} items");
             pendingList.Clear();
@@ -34,12 +34,12 @@ namespace Server
         public void Enter(ClientSession session)
         {
             // 플레이어 추가하고
-            sessions.Add(session);
+            _sessions.Add(session);
             session.Room = this;
 
             // 신입생한테 모든 플레이어 목록 전송
             S_PlayerList players = new S_PlayerList();
-            foreach (ClientSession s in sessions)
+            foreach (ClientSession s in _sessions)
             {
                 players.players.Add(new S_PlayerList.Player()
                 {
@@ -64,7 +64,7 @@ namespace Server
         public void Leave(ClientSession session)
         {
             // 플레이어 제거하고
-            sessions.Remove(session);
+            _sessions.Remove(session);
 
             // 모두에게 알린다
             S_BroadcastLeaveGame leave = new S_BroadcastLeaveGame();

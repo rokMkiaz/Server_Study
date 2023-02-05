@@ -8,8 +8,8 @@ namespace Server
 {
     class SessionManager
     {
-        static readonly SessionManager session = new();
-        public static SessionManager Instance { get { return session; } }
+        static readonly SessionManager _session = new();
+        public static SessionManager Instance { get { return _session; } }
 
         int sessionId = 0;
         readonly Dictionary<int, ClientSession> sessions = new();
